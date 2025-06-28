@@ -153,19 +153,61 @@ console.log(`The sum of the first ${n} natural numbers is: ${sum}`); // "The sum
 // return n * factorial(n - 1);
 //   }
 // }
+
 // console.log(`The factorial of ${n} is: ${factorial(n)}`); // "The factorial of 6 is: 720"
 
 // document.querySelector(".message").textContent = "Correct Number! 🎉";
 // document.querySelector(".number").textContent = 23;
 
+let secretNumber = Math.trunc(Math.random() * 20) + 1;
+let score = 20;
+let highscore = score;
+
 document.querySelector(".check").addEventListener("click", function () {
   const m = Number(document.querySelector(".guess").value);
+  document.querySelector(".highscore").textContent = highscore;
+
+  if (score > highscore) {
+    highscore = score;
+  }
 
   if (!m) {
     document.querySelector(".message").textContent = "⛔ No Number!";
-  } else if (m == 8 || m == 6 || m == 4 || m == 2 || m == 13) {
+  } else if (m === secretNumber) {
     document.querySelector(".message").textContent = "🎉 Correct Number!";
-  } else {
-    document.querySelector(".message").textContent = "❌ Wrong Number!";
+    document.querySelector("body").style.backgroundColor = "#60b347";
+    document.querySelector(".number").style.width = "30rem";
+    document.querySelector(".number").textContent = secretNumber;
+    score++;
+    document.querySelector(".score").textContent = score;
+  } else if (m > secretNumber) {
+    if (score > 1) {
+      document.querySelector(".message").textContent = "High Number!";
+      score--;
+      document.querySelector(".score").textContent = score;
+    } else {
+      document.querySelector(".message").textContent = "💥 You lost the game!";
+      document.querySelector(".score").textContent = 0;
+    }
+  } else if (m < secretNumber) {
+    if (score > 1) {
+      document.querySelector(".message").textContent = "Low Number!";
+      score--;
+      document.querySelector(".score").textContent = score;
+    } else {
+      document.querySelector(".message").textContent = "💥 You lost the game!";
+      document.querySelector(".score").textContent = 0;
+    }
   }
+});
+
+//implementing again button
+
+document.querySelector(".again").addEventListener("click", function () {
+  secretNumber = Math.trunc(Math.random() * 20) + 1;
+  score = 20;
+  document.querySelector(".message").textContent = "Start guessing...";
+  document.querySelector(".score").textContent = score;
+  document.querySelector(".guess").value = "";
+  document.querySelector(".highscore").textContent = "0";
 });
