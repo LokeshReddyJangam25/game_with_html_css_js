@@ -5,15 +5,11 @@
 
 let secretNumber = Math.trunc(Math.random() * 20) + 1;
 let score = 20;
-let highscore = score;
+let highscore = 0;
 
 document.querySelector(".check").addEventListener("click", function () {
   const m = Number(document.querySelector(".guess").value);
   document.querySelector(".highscore").textContent = highscore;
-
-  if (score > highscore) {
-    highscore = score;
-  }
 
   if (!m) {
     document.querySelector(".message").textContent = "⛔ No Number!";
@@ -23,6 +19,10 @@ document.querySelector(".check").addEventListener("click", function () {
     document.querySelector(".number").style.width = "30rem";
     document.querySelector(".number").textContent = secretNumber;
     score++;
+    if (score > highscore) {
+      highscore = score;
+      document.querySelector(".highscore").textContent = highscore;
+    }
     document.querySelector(".score").textContent = score;
   } else if (m > secretNumber) {
     if (score > 1) {
@@ -53,5 +53,4 @@ document.querySelector(".again").addEventListener("click", function () {
   document.querySelector(".message").textContent = "Start guessing...";
   document.querySelector(".score").textContent = score;
   document.querySelector(".guess").value = "";
-  document.querySelector(".highscore").textContent = "0";
 });
