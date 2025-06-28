@@ -155,5 +155,17 @@ console.log(`The sum of the first ${n} natural numbers is: ${sum}`); // "The sum
 // }
 // console.log(`The factorial of ${n} is: ${factorial(n)}`); // "The factorial of 6 is: 720"
 
-document.querySelector(".message").textContent = "Correct Number! 🎉";
-document.querySelector(".number").textContent = 23;
+// document.querySelector(".message").textContent = "Correct Number! 🎉";
+// document.querySelector(".number").textContent = 23;
+
+document.querySelector(".check").addEventListener("click", function () {
+  const m = Number(document.querySelector(".guess").value);
+
+  if (!m) {
+    document.querySelector(".message").textContent = "⛔ No Number!";
+  } else if (m == 8 || m == 6 || m == 4 || m == 2 || m == 13) {
+    document.querySelector(".message").textContent = "🎉 Correct Number!";
+  } else {
+    document.querySelector(".message").textContent = "❌ Wrong Number!";
+  }
+});
